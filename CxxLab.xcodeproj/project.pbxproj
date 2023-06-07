@@ -36,6 +36,7 @@
 		891972782A3061A100AA7041 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 891972762A3061A100AA7041 /* MainInterface.storyboard */; };
 		8919727A2A3061A100AA7041 /* ObservableAUParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891972792A3061A100AA7041 /* ObservableAUParameter.swift */; };
 		8919727C2A3061A100AA7041 /* AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919727B2A3061A100AA7041 /* AudioUnitViewController.swift */; };
+		8919728E2A30797D00AA7041 /* CxxLabAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919728D2A30797D00AA7041 /* CxxLabAudioUnit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		891972792A3061A100AA7041 /* ObservableAUParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableAUParameter.swift; sourceTree = "<group>"; };
 		8919727B2A3061A100AA7041 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
 		8919727D2A3061A100AA7041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8919728D2A30797D00AA7041 /* CxxLabAudioUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CxxLabAudioUnit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +314,7 @@
 			children = (
 				891972612A3061A100AA7041 /* CxxLabExtensionAudioUnit.h */,
 				891972622A3061A100AA7041 /* CxxLabExtensionAudioUnit.mm */,
+				8919728D2A30797D00AA7041 /* CxxLabAudioUnit.swift */,
 			);
 			path = "Audio Unit";
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8919728E2A30797D00AA7041 /* CxxLabAudioUnit.swift in Sources */,
 				8919726A2A3061A100AA7041 /* Parameters.swift in Sources */,
 				891972632A3061A100AA7041 /* CxxLabExtensionAudioUnit.mm in Sources */,
 				8919727A2A3061A100AA7041 /* ObservableAUParameter.swift in Sources */,
