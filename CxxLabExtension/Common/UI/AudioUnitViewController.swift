@@ -52,7 +52,7 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Accessing the `audioUnit` parameter prompts the AU to be created via createAudioUnit(with:)
         guard let audioUnit = self.audioUnit else {
             return

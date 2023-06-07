@@ -6,4 +6,4 @@
 //
 
 #import "CxxLabExtensionAudioUnit.h"
-#import "CxxLabExtensionParameterAddresses.h"
+#import "CxxLabExtensionParameterAddresses.hpp"

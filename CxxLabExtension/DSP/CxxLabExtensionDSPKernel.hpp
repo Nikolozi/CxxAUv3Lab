@@ -15,7 +15,7 @@
 
 #import "SinOscillator.h"
 #import "CxxLabExtension-Swift.h"
-#import "CxxLabExtensionParameterAddresses.h"
+#import "CxxLabExtensionParameterAddresses.hpp"
 
 /*
  CxxLabExtensionDSPKernel
@@ -44,7 +44,7 @@ public:
     // Add a case for each parameter in CxxLabExtensionParameterAddresses.h
     void setParameter(AUParameterAddress address, AUValue value) {
         switch (address) {
-            case CxxLabExtensionParameterAddress::gain:
+            case AUParameterAddress(CxxLabExtensionParameterAddress::gain):
                 mGain = value;
                 break;
         }
@@ -54,7 +54,7 @@ public:
         // Return the goal. It is not thread safe to return the ramping value.
         
         switch (address) {
-            case CxxLabExtensionParameterAddress::gain:
+            case AUParameterAddress(CxxLabExtensionParameterAddress::gain):
                 return (AUValue)mGain;
                 
             default: return 0.f;

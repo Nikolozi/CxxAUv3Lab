@@ -37,6 +37,8 @@
 		8919727A2A3061A100AA7041 /* ObservableAUParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891972792A3061A100AA7041 /* ObservableAUParameter.swift */; };
 		8919727C2A3061A100AA7041 /* AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919727B2A3061A100AA7041 /* AudioUnitViewController.swift */; };
 		8919728E2A30797D00AA7041 /* CxxLabAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919728D2A30797D00AA7041 /* CxxLabAudioUnit.swift */; };
+		891972912A307CF000AA7041 /* CxxLabExtensionParameterAddresses.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 891972682A3061A100AA7041 /* CxxLabExtensionParameterAddresses.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		8932BC4E2A308C4900E1396F /* CxxLabExtensionAUProcessHelper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 891972652A3061A100AA7041 /* CxxLabExtensionAUProcessHelper.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,7 +108,7 @@
 		891972612A3061A100AA7041 /* CxxLabExtensionAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CxxLabExtensionAudioUnit.h; sourceTree = "<group>"; };
 		891972622A3061A100AA7041 /* CxxLabExtensionAudioUnit.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CxxLabExtensionAudioUnit.mm; sourceTree = "<group>"; };
 		891972652A3061A100AA7041 /* CxxLabExtensionAUProcessHelper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CxxLabExtensionAUProcessHelper.hpp; sourceTree = "<group>"; };
-		891972682A3061A100AA7041 /* CxxLabExtensionParameterAddresses.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CxxLabExtensionParameterAddresses.h; sourceTree = "<group>"; };
+		891972682A3061A100AA7041 /* CxxLabExtensionParameterAddresses.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CxxLabExtensionParameterAddresses.hpp; sourceTree = "<group>"; };
 		891972692A3061A100AA7041 /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		8919726C2A3061A100AA7041 /* SinOscillator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinOscillator.h; sourceTree = "<group>"; };
 		8919726D2A3061A100AA7041 /* CxxLabExtensionDSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CxxLabExtensionDSPKernel.hpp; sourceTree = "<group>"; };
@@ -330,7 +332,7 @@
 		891972672A3061A100AA7041 /* Parameters */ = {
 			isa = PBXGroup;
 			children = (
-				891972682A3061A100AA7041 /* CxxLabExtensionParameterAddresses.h */,
+				891972682A3061A100AA7041 /* CxxLabExtensionParameterAddresses.hpp */,
 				891972692A3061A100AA7041 /* Parameters.swift */,
 			);
 			path = Parameters;
@@ -373,6 +375,18 @@
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		891972902A307CE200AA7041 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				891972912A307CF000AA7041 /* CxxLabExtensionParameterAddresses.hpp in Headers */,
+				8932BC4E2A308C4900E1396F /* CxxLabExtensionAUProcessHelper.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		891972112A3061A000AA7041 /* CxxLab */ = {
@@ -434,6 +448,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 891972802A3061A100AA7041 /* Build configuration list for PBXNativeTarget "CxxLabExtension" */;
 			buildPhases = (
+				891972902A307CE200AA7041 /* Headers */,
 				8919724B2A3061A100AA7041 /* Sources */,
 				8919724C2A3061A100AA7041 /* Frameworks */,
 				8919724D2A3061A100AA7041 /* Resources */,

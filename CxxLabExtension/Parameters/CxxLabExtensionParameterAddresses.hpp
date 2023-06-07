@@ -9,14 +9,6 @@
 
 #include <AudioToolbox/AUParameters.h>
 
-#ifdef __cplusplus
-namespace CxxLabExtensionParameterAddress {
-#endif
-
-typedef NS_ENUM(AUParameterAddress, CxxLabExtensionParameterAddress) {
+enum class CxxLabExtensionParameterAddress: AUParameterAddress {
     gain = 0
 };
-
-#ifdef __cplusplus
-}
-#endif
