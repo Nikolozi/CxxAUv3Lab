@@ -141,10 +141,6 @@
     [super deallocateRenderResources];
 }
 
-- (void)deinit {
-    delete _processHelper;
-}
-
 #pragma mark - MIDI
 
 - (MIDIProtocolID)AudioUnitMIDIProtocol {

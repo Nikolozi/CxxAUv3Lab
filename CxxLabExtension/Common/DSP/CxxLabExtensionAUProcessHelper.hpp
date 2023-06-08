@@ -37,7 +37,7 @@ public:
      This function handles the event list processing and rendering loop for you.
      Call it inside your internalRenderBlock.
      */
-    void processWithEvents(AudioBufferList* outBufferList, AudioTimeStamp const *timestamp, AUAudioFrameCount frameCount, AURenderEvent const *events) {
+    void processWithEvents(AudioBufferList* outBufferList, AudioTimeStamp const *timestamp, AUAudioFrameCount frameCount, AURenderEvent const * _Nullable events) {
         
         AUEventSampleTime now = AUEventSampleTime(timestamp->mSampleTime);
         AUAudioFrameCount framesRemaining = frameCount;

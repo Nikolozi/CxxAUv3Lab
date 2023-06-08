@@ -6,15 +6,28 @@ class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
         try super.init(componentDescription: componentDescription, options: options)
 
         setKernel(kernel)
-
-        kernel.setParameter(0, 0.33)
-        debugPrint(kernel.mGain)
     }
 
     override func allocateRenderResources() throws {
         try super.allocateRenderResources()
         helper = AUProcessHelper.create(kernel)
         setProcessHelper(helper)
+    }
+
+    override var internalRenderBlock: AUInternalRenderBlock {
+        #warning("capturing self here, need to deal with it at some point.")
+
+        return { [weak self] actionFlags, timestamp, frameCount, outputBusNumber, outputData, realtimeEventListHead, pullInputBloc  in
+            guard let self, let helper = self.helper else { return noErr }
+
+            guard frameCount <=  self.kernel.maximumFramesToRender() else {
+                return kAudioUnitErr_TooManyFramesToProcess;
+            }
+
+            helper.processWithEvents(outputData, timestamp, frameCount, realtimeEventListHead)
+
+            return noErr
+        }
     }
 
     deinit {
