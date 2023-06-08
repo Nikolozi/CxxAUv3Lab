@@ -116,6 +116,7 @@
 		8919727B2A3061A100AA7041 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
 		8919727D2A3061A100AA7041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8919728D2A30797D00AA7041 /* CxxLabAudioUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CxxLabAudioUnit.swift; sourceTree = "<group>"; };
+		89C60C792A31FA530090CADC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +154,7 @@
 		891972092A3061A000AA7041 = {
 			isa = PBXGroup;
 			children = (
+				89C60C792A31FA530090CADC /* README.md */,
 				891972142A3061A000AA7041 /* CxxLab */,
 				8919723C2A3061A100AA7041 /* CxxLabTests */,
 				891972462A3061A100AA7041 /* CxxLabUITests */,
