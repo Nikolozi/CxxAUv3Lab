@@ -10,6 +10,8 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
+#import <swift/bridging>
+
 #include <vector>
 #include "CxxLabExtensionDSPKernel.hpp"
 
@@ -17,11 +19,20 @@
 class AUProcessHelper
 {
 public:
-    AUProcessHelper(CxxLabExtensionDSPKernel* kernel, UInt32 outputChannelCount)
+    AUProcessHelper(CxxLabExtensionDSPKernel* _Nonnull kernel, UInt32 outputChannelCount)
     : mKernel{kernel},
     mOutputBuffers(outputChannelCount) {
     }
-    
+
+    static AUProcessHelper *_Nonnull create(CxxLabExtensionDSPKernel* _Nonnull kernel) {
+        AUProcessHelper* obj = new AUProcessHelper(kernel, kernel->_outputChannelCount);
+        return obj;
+    }
+
+    static void destroy(AUProcessHelper *_Nonnull obj) {
+        delete obj;
+    }
+
     /**
      This function handles the event list processing and rendering loop for you.
      Call it inside your internalRenderBlock.
@@ -80,7 +91,8 @@ public:
         } while (event && event->head.eventSampleTime <= now);
         return event;
     }
+
 private:
     CxxLabExtensionDSPKernel* mKernel;
     std::vector<float*> mOutputBuffers;
-};
+} SWIFT_UNSAFE_REFERENCE;

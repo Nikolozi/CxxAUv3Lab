@@ -44,6 +44,10 @@
     _kernel = kernel;
 }
 
+- (void)setProcessHelper:(AUProcessHelper*)processHelper {
+    _processHelper = processHelper;
+}
+
 #pragma mark - AUAudioUnit Setup
 
 - (void)setupAudioBuses {
@@ -124,7 +128,6 @@
     
     _kernel->setMusicalContextBlock(self.musicalContextBlock);
     _kernel->initialize(outputChannelCount, _outputBus.format.sampleRate);
-    _processHelper = new AUProcessHelper(_kernel, outputChannelCount);
     return [super allocateRenderResourcesAndReturnError:outError];
 }
 

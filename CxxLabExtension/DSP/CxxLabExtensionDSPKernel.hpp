@@ -35,6 +35,7 @@ public:
     }
 
     void initialize(int channelCount, double inSampleRate) {
+        _outputChannelCount = channelCount;
         mSampleRate = inSampleRate;
         mSinOsc = SinOscillator(inSampleRate);
     }
@@ -211,5 +212,7 @@ public:
     AUAudioFrameCount mMaxFramesToRender = 1024;
     
     SinOscillator mSinOsc;
+
+    int _outputChannelCount = 2;
 
 } SWIFT_UNSAFE_REFERENCE;

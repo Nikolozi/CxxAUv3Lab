@@ -8,3 +8,4 @@
 #import "CxxLabExtensionAudioUnit.h"
 #import "CxxLabExtensionParameterAddresses.hpp"
 #import "CxxLabExtensionDSPKernel.hpp"
+#import "CxxLabExtensionAUProcessHelper.hpp"
