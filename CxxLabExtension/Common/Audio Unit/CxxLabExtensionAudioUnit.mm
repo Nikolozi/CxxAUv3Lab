@@ -29,33 +29,10 @@
     
     if (self == nil) { return nil; }
     
-    [self setupAudioBuses];
-    
     return self;
 }
 
-#pragma mark - AUAudioUnit Setup
-
-- (void)setupAudioBuses {
-    // Create the output bus first
-    AVAudioFormat *format = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100 channels:2];
-    _outputBus = [[AUAudioUnitBus alloc] initWithFormat:format error:nil];
-    _outputBus.maximumChannelCount = 8;
-    
-    // then an array with it
-    _outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self
-                                                             busType:AUAudioUnitBusTypeOutput
-                                                              busses: @[_outputBus]];
-}
-
 #pragma mark - AUAudioUnit Overrides
-
-// An audio unit's audio output connection points.
-// Subclassers must override this property getter and should return the same object every time.
-// See sample code.
-- (AUAudioUnitBusArray *)outputBusses {
-    return _outputBusArray;
-}
 
 
 #pragma mark - AUAudioUnit (AUAudioUnitImplementation)

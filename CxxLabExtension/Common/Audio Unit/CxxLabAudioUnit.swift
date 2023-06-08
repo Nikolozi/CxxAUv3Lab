@@ -1,8 +1,21 @@
 class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
     private var helper = AUProcessHelper.create()
 
+    private let outputBus: AUAudioUnitBus
+    private(set) var _outputBusses: AUAudioUnitBusArray!
+
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions) throws {
+        let format = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)!
+        outputBus = try! .init(format: format)
+        outputBus.maximumChannelCount = 8
+        
         try super.init(componentDescription: componentDescription, options: options)
+
+        _outputBusses = .init(audioUnit: self, busType: .output, busses: [outputBus])
+    }
+
+    override var outputBusses: AUAudioUnitBusArray {
+        _outputBusses
     }
 
     override func allocateRenderResources() throws {
