@@ -24,8 +24,8 @@
 
 @implementation CxxLabExtensionAudioUnit {
     // C++ members need to be ivars; they would be copied on access if they were properties.
-    CxxLabExtensionDSPKernel _kernel;
-    std::unique_ptr<AUProcessHelper> _processHelper;
+    CxxLabExtensionDSPKernel* _kernel;
+    AUProcessHelper* _processHelper;
 }
 
 @synthesize parameterTree = _parameterTree;
@@ -38,6 +38,10 @@
     [self setupAudioBuses];
     
     return self;
+}
+
+- (void)setKernel:(CxxLabExtensionDSPKernel*)kernel {
+    _kernel = kernel;
 }
 
 #pragma mark - AUAudioUnit Setup
@@ -59,7 +63,7 @@
     
     // Send the Parameter default values to the Kernel before setting up the parameter callbacks, so that the defaults set in the Kernel.hpp don't propagate back to the AUParameters via GetParameter
     for (AUParameter *param in _parameterTree.allParameters) {
-        _kernel.setParameter(param.address, param.value);
+        _kernel->setParameter(param.address, param.value);
     }
     
     [self setupParameterCallbacks];
@@ -68,7 +72,7 @@
 - (void)setupParameterCallbacks {
     // Make a local pointer to the kernel to avoid capturing self.
     
-    __block CxxLabExtensionDSPKernel *kernel = &_kernel;
+    __block CxxLabExtensionDSPKernel *kernel = _kernel;
     
     // implementorValueObserver is called when a parameter changes value.
     _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
@@ -91,11 +95,11 @@
 #pragma mark - AUAudioUnit Overrides
 
 - (AUAudioFrameCount)maximumFramesToRender {
-    return _kernel.maximumFramesToRender();
+    return _kernel->maximumFramesToRender();
 }
 
 - (void)setMaximumFramesToRender:(AUAudioFrameCount)maximumFramesToRender {
-    _kernel.setMaximumFramesToRender(maximumFramesToRender);
+    _kernel->setMaximumFramesToRender(maximumFramesToRender);
 }
 
 // An audio unit's audio output connection points.
@@ -106,11 +110,11 @@
 }
 
 - (void)setShouldBypassEffect:(BOOL)shouldBypassEffect {
-    _kernel.setBypass(shouldBypassEffect);
+    _kernel->setBypass(shouldBypassEffect);
 }
 
 - (BOOL)shouldBypassEffect {
-    return _kernel.isBypassed();
+    return _kernel->isBypassed();
 }
 
 // Allocate resources required to render.
@@ -118,9 +122,9 @@
 - (BOOL)allocateRenderResourcesAndReturnError:(NSError **)outError {
     const auto outputChannelCount = [self.outputBusses objectAtIndexedSubscript:0].format.channelCount;
     
-    _kernel.setMusicalContextBlock(self.musicalContextBlock);
-    _kernel.initialize(outputChannelCount, _outputBus.format.sampleRate);
-    _processHelper = std::make_unique<AUProcessHelper>(_kernel, outputChannelCount);
+    _kernel->setMusicalContextBlock(self.musicalContextBlock);
+    _kernel->initialize(outputChannelCount, _outputBus.format.sampleRate);
+    _processHelper = new AUProcessHelper(_kernel, outputChannelCount);
     return [super allocateRenderResourcesAndReturnError:outError];
 }
 
@@ -129,15 +133,19 @@
 - (void)deallocateRenderResources {
     
     // Deallocate your resources.
-    _kernel.deInitialize();
+    _kernel->deInitialize();
     
     [super deallocateRenderResources];
+}
+
+- (void)deinit {
+    delete _processHelper;
 }
 
 #pragma mark - MIDI
 
 - (MIDIProtocolID)AudioUnitMIDIProtocol {
-    return _kernel.AudioUnitMIDIProtocol();
+    return _kernel->AudioUnitMIDIProtocol();
 }
 
 #pragma mark - AUAudioUnit (AUAudioUnitImplementation)
@@ -149,9 +157,9 @@
      render, we're doing it wrong.
      */
     // Specify captured objects are mutable.
-    __block CxxLabExtensionDSPKernel *kernel = &_kernel;
-    __block std::unique_ptr<AUProcessHelper> &processHelper = _processHelper;
-    
+//    __block CxxLabExtensionDSPKernel* kernel = _kernel;
+//    __block AUProcessHelper* processHelper = _processHelper;
+
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags 				*actionFlags,
                               const AudioTimeStamp       				*timestamp,
                               AVAudioFrameCount           				frameCount,
@@ -159,8 +167,12 @@
                               AudioBufferList            				*outputData,
                               const AURenderEvent        				*realtimeEventListHead,
                               AURenderPullInputBlock __unsafe_unretained pullInputBlock) {
-        
-        if (frameCount > kernel->maximumFramesToRender()) {
+
+        if (_kernel == nullptr || _processHelper == nullptr) {
+            return noErr;
+        }
+
+        if (frameCount > _kernel->maximumFramesToRender()) {
             return kAudioUnitErr_TooManyFramesToProcess;
         }
         
@@ -178,8 +190,8 @@
          
          See the description of the canProcessInPlace property.
          */
-        processHelper->processWithEvents(outputData, timestamp, frameCount, realtimeEventListHead);
-        
+        _processHelper->processWithEvents(outputData, timestamp, frameCount, realtimeEventListHead);
+
         return noErr;
     };
     

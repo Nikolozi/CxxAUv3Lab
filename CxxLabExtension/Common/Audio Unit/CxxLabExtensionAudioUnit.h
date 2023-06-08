@@ -10,5 +10,6 @@
 
 @interface CxxLabExtensionAudioUnit : AUAudioUnit
 
+- (void)setKernel:(id)kernel;
 - (void)setupParameterTree:(AUParameterTree *)parameterTree;
 @end

@@ -17,7 +17,7 @@
 class AUProcessHelper
 {
 public:
-    AUProcessHelper(CxxLabExtensionDSPKernel& kernel, UInt32 outputChannelCount)
+    AUProcessHelper(CxxLabExtensionDSPKernel* kernel, UInt32 outputChannelCount)
     : mKernel{kernel},
     mOutputBuffers(outputChannelCount) {
     }
@@ -37,7 +37,7 @@ public:
                 mOutputBuffers[channel] = (float*)outBufferListPtr->mBuffers[channel].mData + frameOffset;
             }
             
-            mKernel.process(mOutputBuffers, now, frameCount);
+            mKernel->process(mOutputBuffers, now, frameCount);
         };
         
         while (framesRemaining > 0) {
@@ -71,7 +71,7 @@ public:
     
     AURenderEvent const * performAllSimultaneousEvents(AUEventSampleTime now, AURenderEvent const *event) {
         do {
-            mKernel.handleOneEvent(now, event);
+            mKernel->handleOneEvent(now, event);
             
             // Go to next event.
             event = event->head.next;
@@ -81,6 +81,6 @@ public:
         return event;
     }
 private:
-    CxxLabExtensionDSPKernel& mKernel;
+    CxxLabExtensionDSPKernel* mKernel;
     std::vector<float*> mOutputBuffers;
 };
