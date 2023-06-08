@@ -12,6 +12,7 @@
 #import <algorithm>
 #import <vector>
 #import <span>
+#import <simd/simd.h>
 
 #import <swift/bridging>
 
@@ -93,7 +94,7 @@ public:
     
     inline double MIDINoteToFrequency(int note) {
         constexpr auto kMiddleA = 440.0;
-        return (kMiddleA / 32.0) * pow(2, ((note - 9) / 12.0));
+        return (kMiddleA / 32.0) * simd::exp2((note - 9) / 12.0);
     }
     
     /**

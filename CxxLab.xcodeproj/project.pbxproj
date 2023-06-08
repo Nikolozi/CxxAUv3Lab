@@ -27,7 +27,6 @@
 		8919725A2A3061A100AA7041 /* ParameterSpecBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891972592A3061A100AA7041 /* ParameterSpecBase.swift */; };
 		8919725D2A3061A100AA7041 /* CrossPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919725C2A3061A100AA7041 /* CrossPlatform.swift */; };
 		8919725F2A3061A100AA7041 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919725E2A3061A100AA7041 /* String+Utils.swift */; };
-		891972632A3061A100AA7041 /* CxxLabExtensionAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 891972622A3061A100AA7041 /* CxxLabExtensionAudioUnit.mm */; };
 		891972662A3061A100AA7041 /* CxxLabExtensionAUProcessHelper.hpp in Resources */ = {isa = PBXBuildFile; fileRef = 891972652A3061A100AA7041 /* CxxLabExtensionAUProcessHelper.hpp */; };
 		8919726A2A3061A100AA7041 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891972692A3061A100AA7041 /* Parameters.swift */; };
 		8919726E2A3061A100AA7041 /* CxxLabExtensionDSPKernel.hpp in Resources */ = {isa = PBXBuildFile; fileRef = 8919726D2A3061A100AA7041 /* CxxLabExtensionDSPKernel.hpp */; };
@@ -105,8 +104,6 @@
 		891972592A3061A100AA7041 /* ParameterSpecBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterSpecBase.swift; sourceTree = "<group>"; };
 		8919725C2A3061A100AA7041 /* CrossPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossPlatform.swift; sourceTree = "<group>"; };
 		8919725E2A3061A100AA7041 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
-		891972612A3061A100AA7041 /* CxxLabExtensionAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CxxLabExtensionAudioUnit.h; sourceTree = "<group>"; };
-		891972622A3061A100AA7041 /* CxxLabExtensionAudioUnit.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CxxLabExtensionAudioUnit.mm; sourceTree = "<group>"; };
 		891972652A3061A100AA7041 /* CxxLabExtensionAUProcessHelper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CxxLabExtensionAUProcessHelper.hpp; sourceTree = "<group>"; };
 		891972682A3061A100AA7041 /* CxxLabExtensionParameterAddresses.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CxxLabExtensionParameterAddresses.hpp; sourceTree = "<group>"; };
 		891972692A3061A100AA7041 /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
@@ -314,8 +311,6 @@
 		891972602A3061A100AA7041 /* Audio Unit */ = {
 			isa = PBXGroup;
 			children = (
-				891972612A3061A100AA7041 /* CxxLabExtensionAudioUnit.h */,
-				891972622A3061A100AA7041 /* CxxLabExtensionAudioUnit.mm */,
 				8919728D2A30797D00AA7041 /* CxxLabAudioUnit.swift */,
 			);
 			path = "Audio Unit";
@@ -587,7 +582,6 @@
 			files = (
 				8919728E2A30797D00AA7041 /* CxxLabAudioUnit.swift in Sources */,
 				8919726A2A3061A100AA7041 /* Parameters.swift in Sources */,
-				891972632A3061A100AA7041 /* CxxLabExtensionAudioUnit.mm in Sources */,
 				8919727A2A3061A100AA7041 /* ObservableAUParameter.swift in Sources */,
 				8919725A2A3061A100AA7041 /* ParameterSpecBase.swift in Sources */,
 				891972712A3061A100AA7041 /* CxxLabExtensionMainView.swift in Sources */,

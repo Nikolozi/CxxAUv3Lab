@@ -5,7 +5,6 @@
 //  Created by Nikolozi Meladze on 7/6/2023.
 //
 
-#import "CxxLabExtensionAudioUnit.h"
 #import "CxxLabExtensionParameterAddresses.hpp"
 #import "CxxLabExtensionDSPKernel.hpp"
 #import "CxxLabExtensionAUProcessHelper.hpp"
