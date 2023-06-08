@@ -94,27 +94,11 @@
 
 #pragma mark - AUAudioUnit Overrides
 
-- (AUAudioFrameCount)maximumFramesToRender {
-    return _kernel->maximumFramesToRender();
-}
-
-- (void)setMaximumFramesToRender:(AUAudioFrameCount)maximumFramesToRender {
-    _kernel->setMaximumFramesToRender(maximumFramesToRender);
-}
-
 // An audio unit's audio output connection points.
 // Subclassers must override this property getter and should return the same object every time.
 // See sample code.
 - (AUAudioUnitBusArray *)outputBusses {
     return _outputBusArray;
-}
-
-- (void)setShouldBypassEffect:(BOOL)shouldBypassEffect {
-    _kernel->setBypass(shouldBypassEffect);
-}
-
-- (BOOL)shouldBypassEffect {
-    return _kernel->isBypassed();
 }
 
 // Allocate resources required to render.
@@ -126,21 +110,6 @@
     return [super allocateRenderResourcesAndReturnError:outError];
 }
 
-// Deallocate resources allocated in allocateRenderResourcesAndReturnError:
-// Subclassers should call the superclass implementation.
-- (void)deallocateRenderResources {
-    
-    // Deallocate your resources.
-    _kernel->deInitialize();
-    
-    [super deallocateRenderResources];
-}
-
-#pragma mark - MIDI
-
-- (MIDIProtocolID)AudioUnitMIDIProtocol {
-    return _kernel->AudioUnitMIDIProtocol();
-}
 
 #pragma mark - AUAudioUnit (AUAudioUnitImplementation)
 

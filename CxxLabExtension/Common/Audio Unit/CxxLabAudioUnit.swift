@@ -12,6 +12,25 @@ class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
         helper.kernel.setMusicalContextBlock(musicalContextBlock)
     }
 
+    override func deallocateRenderResources() {
+        helper.kernel.deInitialize()
+        super.deallocateRenderResources()
+    }
+
+    override var maximumFramesToRender: AUAudioFrameCount {
+        set { helper.kernel.setMaximumFramesToRender(newValue) }
+        get { helper.kernel.maximumFramesToRender() }
+    }
+
+    override var shouldBypassEffect: Bool {
+        set { helper.kernel.setBypass(newValue) }
+        get { helper.kernel.isBypassed() }
+    }
+
+    override var audioUnitMIDIProtocol: MIDIProtocolID {
+        helper.kernel.AudioUnitMIDIProtocol()
+    }
+
     override var internalRenderBlock: AUInternalRenderBlock {
         let helper = self.helper
 
