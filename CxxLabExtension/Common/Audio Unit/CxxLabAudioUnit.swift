@@ -46,18 +46,7 @@ class CxxLabAudioUnit: AUAudioUnit {
     }
 
     override var internalRenderBlock: AUInternalRenderBlock {
-        let helper = self.helper
-
-        return { actionFlags, timestamp, frameCount, outputBusNumber, outputData, realtimeEventListHead, pullInputBloc  in
-
-            guard frameCount <= helper.kernel.maximumFramesToRender() else {
-                return kAudioUnitErr_TooManyFramesToProcess;
-            }
-
-            helper.processWithEvents(outputData, timestamp, frameCount, realtimeEventListHead)
-
-            return noErr
-        }
+        makeInternalRenderBlock(helper)
     }
 
     deinit {
