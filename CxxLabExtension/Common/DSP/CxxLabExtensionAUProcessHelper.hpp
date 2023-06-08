@@ -19,17 +19,22 @@
 class AUProcessHelper
 {
 public:
+    CxxLabExtensionDSPKernel* _Nonnull kernel;
+
     AUProcessHelper(CxxLabExtensionDSPKernel* _Nonnull kernel, UInt32 outputChannelCount)
     : mKernel{kernel},
     mOutputBuffers(outputChannelCount) {
     }
 
-    static AUProcessHelper *_Nonnull create(CxxLabExtensionDSPKernel* _Nonnull kernel) {
+    static AUProcessHelper *_Nonnull create() {
+        auto kernel = CxxLabExtensionDSPKernel::create();
         AUProcessHelper* obj = new AUProcessHelper(kernel, kernel->_outputChannelCount);
+        obj->kernel = kernel;
         return obj;
     }
 
     static void destroy(AUProcessHelper *_Nonnull obj) {
+        CxxLabExtensionDSPKernel::destroy(obj->kernel);
         delete obj;
     }
 

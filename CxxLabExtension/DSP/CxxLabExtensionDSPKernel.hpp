@@ -16,7 +16,6 @@
 #import <swift/bridging>
 
 #import "SinOscillator.h"
-//#import "CxxLabExtension-Swift.h"
 #import "CxxLabExtensionParameterAddresses.hpp"
 
 /*

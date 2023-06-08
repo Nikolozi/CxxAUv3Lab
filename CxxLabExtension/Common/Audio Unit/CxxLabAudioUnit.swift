@@ -1,26 +1,23 @@
 class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
-    private let kernel = CxxLabExtensionDSPKernel.create()
-    private var helper: AUProcessHelper!
+    private var helper = AUProcessHelper.create()
 
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions) throws {
         try super.init(componentDescription: componentDescription, options: options)
 
-        setKernel(kernel)
+        setKernel(helper.kernel)
     }
 
     override func allocateRenderResources() throws {
         try super.allocateRenderResources()
-        helper = AUProcessHelper.create(kernel)
-        kernel.setMusicalContextBlock(musicalContextBlock)
+        helper.kernel.setMusicalContextBlock(musicalContextBlock)
     }
 
     override var internalRenderBlock: AUInternalRenderBlock {
-        #warning("capturing self here, need to deal with it at some point.")
+        let helper = self.helper
 
-        return { [weak self] actionFlags, timestamp, frameCount, outputBusNumber, outputData, realtimeEventListHead, pullInputBloc  in
-            guard let self, let helper = self.helper else { return noErr }
+        return { actionFlags, timestamp, frameCount, outputBusNumber, outputData, realtimeEventListHead, pullInputBloc  in
 
-            guard frameCount <=  self.kernel.maximumFramesToRender() else {
+            guard frameCount <=  helper.kernel.maximumFramesToRender() else {
                 return kAudioUnitErr_TooManyFramesToProcess;
             }
 
@@ -31,7 +28,6 @@ class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
     }
 
     deinit {
-        CxxLabExtensionDSPKernel.destroy(kernel)
         AUProcessHelper.destroy(helper)
     }
 }
