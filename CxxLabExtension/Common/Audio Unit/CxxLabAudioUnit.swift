@@ -59,6 +59,29 @@ extension CxxLabAudioUnit {
             helper.kernel.setParameter(parameter.address, parameter.value)
         }
 
-        self.setupParameterCallbacks(parameterTree)
+        setupParameterCallbacks(parameterTree)
+    }
+}
+
+private extension CxxLabAudioUnit {
+    func setupParameterCallbacks(_ parameterTree: AUParameterTree) {
+        // Make a local pointer to the kernel to avoid capturing self.
+        let kernel = helper.kernel
+
+        // implementorValueObserver is called when a parameter changes value.
+        parameterTree.implementorValueObserver = { parameter, value in
+            kernel.setParameter(parameter.address, value)
+        }
+
+        // implementorValueProvider is called when the value needs to be refreshed.
+        parameterTree.implementorValueProvider = { parameter in
+            kernel.getParameter(parameter.address);
+        };
+
+        // A function to provide string representations of parameter values.
+        parameterTree.implementorStringFromValueCallback = { parameter, value in
+            let v = value?.pointee == nil ? value!.pointee : parameter.value
+            return "\(v)"
+        };
     }
 }

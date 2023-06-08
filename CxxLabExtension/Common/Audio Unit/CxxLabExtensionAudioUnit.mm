@@ -55,29 +55,6 @@
                                                               busses: @[_outputBus]];
 }
 
-- (void)setupParameterCallbacks:(AUParameterTree*)parameterTree {
-    // Make a local pointer to the kernel to avoid capturing self.
-    
-    __block CxxLabExtensionDSPKernel *kernel = _kernel;
-    
-    // implementorValueObserver is called when a parameter changes value.
-    parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
-        kernel->setParameter(param.address, value);
-    };
-    
-    // implementorValueProvider is called when the value needs to be refreshed.
-    parameterTree.implementorValueProvider = ^(AUParameter *param) {
-        return kernel->getParameter(param.address);
-    };
-    
-    // A function to provide string representations of parameter values.
-    parameterTree.implementorStringFromValueCallback = ^(AUParameter *param, const AUValue *__nullable valuePtr) {
-        AUValue value = valuePtr == nil ? param.value : *valuePtr;
-        
-        return [NSString stringWithFormat:@"%.f", value];
-    };
-}
-
 #pragma mark - AUAudioUnit Overrides
 
 // An audio unit's audio output connection points.
