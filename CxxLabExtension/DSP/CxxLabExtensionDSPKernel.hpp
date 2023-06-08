@@ -23,17 +23,15 @@
  CxxLabExtensionDSPKernel
  As a non-ObjC class, this is safe to use from render thread.
  */
-
 class CxxLabExtensionDSPKernel {
 public:
-//    static CxxLabExtensionDSPKernel* create();
-//
-//    CxxLabExtensionDSPKernel(const CxxLabExtensionDSPKernel &) = delete; // non-copyable
-
-    static CxxLabExtensionDSPKernel* create() {
+    static CxxLabExtensionDSPKernel *_Nonnull create() {
         CxxLabExtensionDSPKernel* obj = new CxxLabExtensionDSPKernel();
-        obj->refCount = 1;
         return obj;
+    }
+
+    static void destroy(CxxLabExtensionDSPKernel *_Nonnull obj) {
+        delete obj;
     }
 
     void initialize(int channelCount, double inSampleRate) {
@@ -214,18 +212,4 @@ public:
     
     SinOscillator mSinOsc;
 
-    std::atomic<int> refCount;  // Reference count
-
-} SWIFT_SHARED_REFERENCE(retainSharedObject, releaseSharedObject);
-//} SWIFT_UNSAFE_REFERENCE;
-
-void retainSharedObject(CxxLabExtensionDSPKernel *kernel) {
-    if (kernel->refCount.fetch_sub(1, std::memory_order_release) == 1) {
-        std::atomic_thread_fence(std::memory_order_acquire);
-        delete kernel;
-    }
-};
-
-void releaseSharedObject(CxxLabExtensionDSPKernel *kernel) {
-    kernel->refCount.fetch_add(1, std::memory_order_relaxed);
-};
+} SWIFT_UNSAFE_REFERENCE;

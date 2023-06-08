@@ -40,10 +40,6 @@
     return self;
 }
 
-- (void*)kernel {
-    return &_kernel;
-}
-
 #pragma mark - AUAudioUnit Setup
 
 - (void)setupAudioBuses {
