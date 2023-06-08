@@ -1,4 +1,4 @@
-class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
+class CxxLabAudioUnit: AUAudioUnit {
     private var helper = AUProcessHelper.create()
 
     private let outputBus: AUAudioUnitBus
@@ -50,7 +50,7 @@ class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
 
         return { actionFlags, timestamp, frameCount, outputBusNumber, outputData, realtimeEventListHead, pullInputBloc  in
 
-            guard frameCount <=  helper.kernel.maximumFramesToRender() else {
+            guard frameCount <= helper.kernel.maximumFramesToRender() else {
                 return kAudioUnitErr_TooManyFramesToProcess;
             }
 
