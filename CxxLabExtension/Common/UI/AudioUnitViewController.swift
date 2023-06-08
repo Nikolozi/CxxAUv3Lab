@@ -61,10 +61,10 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
     }
     
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-        audioUnit = try CssLabAudioUnit(componentDescription: componentDescription, options: [])
+        audioUnit = try CxxLabAudioUnit(componentDescription: componentDescription, options: [])
 
-        guard let audioUnit = self.audioUnit as? CssLabAudioUnit else {
-            log.error("Unable to create CssLabAudioUnit")
+        guard let audioUnit = self.audioUnit as? CxxLabAudioUnit else {
+            log.error("Unable to create CxxLabAudioUnit")
             return audioUnit!
         }
         

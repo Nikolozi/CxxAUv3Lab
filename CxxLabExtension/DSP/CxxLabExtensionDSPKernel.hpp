@@ -13,21 +13,34 @@
 #import <vector>
 #import <span>
 
+#import <swift/bridging>
+
 #import "SinOscillator.h"
-#import "CxxLabExtension-Swift.h"
+//#import "CxxLabExtension-Swift.h"
 #import "CxxLabExtensionParameterAddresses.hpp"
 
 /*
  CxxLabExtensionDSPKernel
  As a non-ObjC class, this is safe to use from render thread.
  */
+
 class CxxLabExtensionDSPKernel {
 public:
+//    static CxxLabExtensionDSPKernel* create();
+//
+//    CxxLabExtensionDSPKernel(const CxxLabExtensionDSPKernel &) = delete; // non-copyable
+
+    static CxxLabExtensionDSPKernel* create() {
+        CxxLabExtensionDSPKernel* obj = new CxxLabExtensionDSPKernel();
+        obj->refCount = 1;
+        return obj;
+    }
+
     void initialize(int channelCount, double inSampleRate) {
         mSampleRate = inSampleRate;
         mSinOsc = SinOscillator(inSampleRate);
     }
-    
+
     void deInitialize() {
     }
     
@@ -200,4 +213,19 @@ public:
     AUAudioFrameCount mMaxFramesToRender = 1024;
     
     SinOscillator mSinOsc;
+
+    std::atomic<int> refCount;  // Reference count
+
+} SWIFT_SHARED_REFERENCE(retainSharedObject, releaseSharedObject);
+//} SWIFT_UNSAFE_REFERENCE;
+
+void retainSharedObject(CxxLabExtensionDSPKernel *kernel) {
+    if (kernel->refCount.fetch_sub(1, std::memory_order_release) == 1) {
+        std::atomic_thread_fence(std::memory_order_acquire);
+        delete kernel;
+    }
+};
+
+void releaseSharedObject(CxxLabExtensionDSPKernel *kernel) {
+    kernel->refCount.fetch_add(1, std::memory_order_relaxed);
 };

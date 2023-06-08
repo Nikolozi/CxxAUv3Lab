@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1500"
+   wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -55,8 +56,12 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "0"
+         BundleIdentifier = "com.kymatica.AUM"
+         RemotePath = "/var/containers/Bundle/Application/67FF429B-A434-488A-998A-FC003F2970D7/AUM.app">
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "891972112A3061A000AA7041"
@@ -64,7 +69,7 @@
             BlueprintName = "CxxLab"
             ReferencedContainer = "container:CxxLab.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

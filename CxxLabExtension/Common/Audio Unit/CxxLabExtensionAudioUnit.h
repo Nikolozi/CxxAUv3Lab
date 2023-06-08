@@ -9,5 +9,8 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface CxxLabExtensionAudioUnit : AUAudioUnit
+
+@property (nonatomic, readonly) void* kernel;
+
 - (void)setupParameterTree:(AUParameterTree *)parameterTree;
 @end

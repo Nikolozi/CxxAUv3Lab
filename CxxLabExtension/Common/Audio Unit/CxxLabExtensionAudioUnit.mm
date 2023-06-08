@@ -13,7 +13,6 @@
 #import "CxxLabExtensionAUProcessHelper.hpp"
 #import "CxxLabExtensionDSPKernel.hpp"
 
-
 // Define parameter addresses.
 
 @interface CxxLabExtensionAudioUnit ()
@@ -22,7 +21,6 @@
 @property AUAudioUnitBusArray *outputBusArray;
 @property (nonatomic, readonly) AUAudioUnitBus *outputBus;
 @end
-
 
 @implementation CxxLabExtensionAudioUnit {
     // C++ members need to be ivars; they would be copied on access if they were properties.
@@ -40,6 +38,10 @@
     [self setupAudioBuses];
     
     return self;
+}
+
+- (void*)kernel {
+    return &_kernel;
 }
 
 #pragma mark - AUAudioUnit Setup
