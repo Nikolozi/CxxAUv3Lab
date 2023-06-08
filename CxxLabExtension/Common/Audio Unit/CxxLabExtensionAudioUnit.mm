@@ -126,7 +126,6 @@
 - (BOOL)allocateRenderResourcesAndReturnError:(NSError **)outError {
     const auto outputChannelCount = [self.outputBusses objectAtIndexedSubscript:0].format.channelCount;
     
-    _kernel->setMusicalContextBlock(self.musicalContextBlock);
     _kernel->initialize(outputChannelCount, _outputBus.format.sampleRate);
     return [super allocateRenderResourcesAndReturnError:outError];
 }
