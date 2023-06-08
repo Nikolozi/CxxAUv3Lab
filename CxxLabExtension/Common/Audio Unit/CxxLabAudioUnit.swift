@@ -3,8 +3,6 @@ class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
 
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions) throws {
         try super.init(componentDescription: componentDescription, options: options)
-
-        setKernel(helper.kernel)
     }
 
     override func allocateRenderResources() throws {

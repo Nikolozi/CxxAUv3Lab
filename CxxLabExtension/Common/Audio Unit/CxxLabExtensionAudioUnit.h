@@ -10,5 +10,4 @@
 
 @interface CxxLabExtensionAudioUnit : AUAudioUnit
 @property (nonatomic, readonly) AUAudioUnitBus *outputBus;
-- (void)setKernel:(id)kernel;
 @end

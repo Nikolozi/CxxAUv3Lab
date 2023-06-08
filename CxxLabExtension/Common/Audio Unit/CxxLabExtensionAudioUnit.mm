@@ -21,8 +21,6 @@
 @end
 
 @implementation CxxLabExtensionAudioUnit {
-    // C++ members need to be ivars; they would be copied on access if they were properties.
-    CxxLabExtensionDSPKernel* _kernel;
     AUProcessHelper* _processHelper;
 }
 
@@ -34,10 +32,6 @@
     [self setupAudioBuses];
     
     return self;
-}
-
-- (void)setKernel:(CxxLabExtensionDSPKernel*)kernel {
-    _kernel = kernel;
 }
 
 #pragma mark - AUAudioUnit Setup
@@ -84,13 +78,9 @@
                               const AURenderEvent        				*realtimeEventListHead,
                               AURenderPullInputBlock __unsafe_unretained pullInputBlock) {
 
-        if (_kernel == nullptr || _processHelper == nullptr) {
-            return noErr;
-        }
-
-        if (frameCount > _kernel->maximumFramesToRender()) {
-            return kAudioUnitErr_TooManyFramesToProcess;
-        }
+//        if (frameCount > _kernel->maximumFramesToRender()) {
+//            return kAudioUnitErr_TooManyFramesToProcess;
+//        }
         
         /*
          Important:
