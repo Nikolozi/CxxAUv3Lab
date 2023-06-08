@@ -12,7 +12,6 @@ class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
         try super.allocateRenderResources()
         helper = AUProcessHelper.create(kernel)
         kernel.setMusicalContextBlock(musicalContextBlock)
-        setProcessHelper(helper)
     }
 
     override var internalRenderBlock: AUInternalRenderBlock {

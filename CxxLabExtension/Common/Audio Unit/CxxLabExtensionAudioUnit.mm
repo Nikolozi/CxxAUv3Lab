@@ -44,10 +44,6 @@
     _kernel = kernel;
 }
 
-- (void)setProcessHelper:(AUProcessHelper*)processHelper {
-    _processHelper = processHelper;
-}
-
 #pragma mark - AUAudioUnit Setup
 
 - (void)setupAudioBuses {
