@@ -10,6 +10,9 @@ class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
     override func allocateRenderResources() throws {
         try super.allocateRenderResources()
         helper.kernel.setMusicalContextBlock(musicalContextBlock)
+        let outputChannelCount = self.outputBusses[0].format.channelCount
+        let sampleRate = outputBus.format.sampleRate
+        helper.kernel.initialize(Int32(outputChannelCount), sampleRate)
     }
 
     override func deallocateRenderResources() {

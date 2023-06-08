@@ -18,7 +18,6 @@
 @interface CxxLabExtensionAudioUnit ()
 
 @property AUAudioUnitBusArray *outputBusArray;
-@property (nonatomic, readonly) AUAudioUnitBus *outputBus;
 @end
 
 @implementation CxxLabExtensionAudioUnit {
@@ -62,15 +61,6 @@
 // See sample code.
 - (AUAudioUnitBusArray *)outputBusses {
     return _outputBusArray;
-}
-
-// Allocate resources required to render.
-// Subclassers should call the superclass implementation.
-- (BOOL)allocateRenderResourcesAndReturnError:(NSError **)outError {
-    const auto outputChannelCount = [self.outputBusses objectAtIndexedSubscript:0].format.channelCount;
-    
-    _kernel->initialize(outputChannelCount, _outputBus.format.sampleRate);
-    return [super allocateRenderResourcesAndReturnError:outError];
 }
 
 
