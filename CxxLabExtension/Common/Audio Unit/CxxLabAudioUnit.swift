@@ -50,3 +50,15 @@ class CxxLabAudioUnit: CxxLabExtensionAudioUnit {
         AUProcessHelper.destroy(helper)
     }
 }
+
+extension CxxLabAudioUnit {
+    func setupParameterTree(_ parameterTree: AUParameterTree) {
+        self.parameterTree = parameterTree
+
+        for parameter in parameterTree.allParameters {
+            helper.kernel.setParameter(parameter.address, parameter.value)
+        }
+
+        self.setupParameterCallbacks(parameterTree)
+    }
+}

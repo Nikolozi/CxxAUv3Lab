@@ -17,7 +17,6 @@
 
 @interface CxxLabExtensionAudioUnit ()
 
-@property (nonatomic, readwrite) AUParameterTree *parameterTree;
 @property AUAudioUnitBusArray *outputBusArray;
 @property (nonatomic, readonly) AUAudioUnitBus *outputBus;
 @end
@@ -27,8 +26,6 @@
     CxxLabExtensionDSPKernel* _kernel;
     AUProcessHelper* _processHelper;
 }
-
-@synthesize parameterTree = _parameterTree;
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
     self = [super initWithComponentDescription:componentDescription options:options error:outError];
@@ -58,34 +55,23 @@
                                                               busses: @[_outputBus]];
 }
 
-- (void)setupParameterTree:(AUParameterTree *)parameterTree {
-    _parameterTree = parameterTree;
-    
-    // Send the Parameter default values to the Kernel before setting up the parameter callbacks, so that the defaults set in the Kernel.hpp don't propagate back to the AUParameters via GetParameter
-    for (AUParameter *param in _parameterTree.allParameters) {
-        _kernel->setParameter(param.address, param.value);
-    }
-    
-    [self setupParameterCallbacks];
-}
-
-- (void)setupParameterCallbacks {
+- (void)setupParameterCallbacks:(AUParameterTree*)parameterTree {
     // Make a local pointer to the kernel to avoid capturing self.
     
     __block CxxLabExtensionDSPKernel *kernel = _kernel;
     
     // implementorValueObserver is called when a parameter changes value.
-    _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
+    parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
         kernel->setParameter(param.address, value);
     };
     
     // implementorValueProvider is called when the value needs to be refreshed.
-    _parameterTree.implementorValueProvider = ^(AUParameter *param) {
+    parameterTree.implementorValueProvider = ^(AUParameter *param) {
         return kernel->getParameter(param.address);
     };
     
     // A function to provide string representations of parameter values.
-    _parameterTree.implementorStringFromValueCallback = ^(AUParameter *param, const AUValue *__nullable valuePtr) {
+    parameterTree.implementorStringFromValueCallback = ^(AUParameter *param, const AUValue *__nullable valuePtr) {
         AUValue value = valuePtr == nil ? param.value : *valuePtr;
         
         return [NSString stringWithFormat:@"%.f", value];
