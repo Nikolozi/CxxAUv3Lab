@@ -8,3 +8,8 @@ Check out the [Mixing Swift and C++](https://www.swift.org/documentation/cxx-int
 I did add MacCatalyst support but I think there's some bug in Xcode 15 where it auto-generates code for Asset management and fails to compile. It's best to use it on an iOS device, inside AUM or another host.
 
 If you have any feedback or questions let me know.
+
+#### Core Audio Lab Feedback
+
+During the Core Audio lab, Apple engineers had a quick look at the code (commit [0b9a715](https://github.com/Nikolozi/CxxAUv3Lab/commit/0b9a715aac8083558e245933bd307dd1deb88ab6)) and their main concern was around the contents of `internalRenderBlock` method. From the brief look, they said it looks correct and the best way to test its real-time safety is to use `auval` with the `-real-time-safety` flag. I'm on macOS 13.4 and Xcode 15.0 beta (15A5160n) and having issues getting it to create a release build, the compiler is crashing. I'll investigate it when I have more time.
+
