@@ -98,26 +98,8 @@ public:
     }
 
 private:
-    CxxLabExtensionDSPKernel* mKernel;
+    CxxLabExtensionDSPKernel* _Nonnull mKernel;
     std::vector<float*> mOutputBuffers;
 } SWIFT_UNSAFE_REFERENCE;
 
-
-AUInternalRenderBlock makeInternalRenderBlock(AUProcessHelper* _Nonnull helper) {
-    return ^AUAudioUnitStatus(AudioUnitRenderActionFlags                 *actionFlags,
-                              const AudioTimeStamp                       *timestamp,
-                              AVAudioFrameCount                           frameCount,
-                              NSInteger                                   outputBusNumber,
-                              AudioBufferList                            *outputData,
-                              const AURenderEvent                        *realtimeEventListHead,
-                              AURenderPullInputBlock __unsafe_unretained pullInputBlock) {
-
-        if (frameCount > helper->kernel->maximumFramesToRender()) {
-            return kAudioUnitErr_TooManyFramesToProcess;
-        }
-
-        helper->processWithEvents(outputData, timestamp, frameCount, realtimeEventListHead);
-
-        return noErr;
-    };
-}
+AUInternalRenderBlock _Nonnull makeInternalRenderBlock(AUProcessHelper* _Nonnull helper);

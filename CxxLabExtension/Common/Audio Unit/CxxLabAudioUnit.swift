@@ -1,5 +1,5 @@
 class CxxLabAudioUnit: AUAudioUnit {
-    private var helper = AUProcessHelper.create()
+    private let helper = AUProcessHelper.create()
 
     private let outputBus: AUAudioUnitBus
     private(set) var _outputBusses: AUAudioUnitBusArray!

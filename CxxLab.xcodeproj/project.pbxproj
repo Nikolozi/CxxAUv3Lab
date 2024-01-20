@@ -38,6 +38,7 @@
 		8919728E2A30797D00AA7041 /* CxxLabAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919728D2A30797D00AA7041 /* CxxLabAudioUnit.swift */; };
 		891972912A307CF000AA7041 /* CxxLabExtensionParameterAddresses.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 891972682A3061A100AA7041 /* CxxLabExtensionParameterAddresses.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8932BC4E2A308C4900E1396F /* CxxLabExtensionAUProcessHelper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 891972652A3061A100AA7041 /* CxxLabExtensionAUProcessHelper.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAD737792B4EBEE40028B623 /* CxxLabExtensionAUProcessHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAD737782B4EBEE40028B623 /* CxxLabExtensionAUProcessHelper.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		8919727D2A3061A100AA7041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8919728D2A30797D00AA7041 /* CxxLabAudioUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CxxLabAudioUnit.swift; sourceTree = "<group>"; };
 		89C60C792A31FA530090CADC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FAD737782B4EBEE40028B623 /* CxxLabExtensionAUProcessHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CxxLabExtensionAUProcessHelper.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				891972652A3061A100AA7041 /* CxxLabExtensionAUProcessHelper.hpp */,
+				FAD737782B4EBEE40028B623 /* CxxLabExtensionAUProcessHelper.mm */,
 			);
 			path = DSP;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8919728E2A30797D00AA7041 /* CxxLabAudioUnit.swift in Sources */,
+				FAD737792B4EBEE40028B623 /* CxxLabExtensionAUProcessHelper.mm in Sources */,
 				8919726A2A3061A100AA7041 /* Parameters.swift in Sources */,
 				8919727A2A3061A100AA7041 /* ObservableAUParameter.swift in Sources */,
 				8919725A2A3061A100AA7041 /* ParameterSpecBase.swift in Sources */,
